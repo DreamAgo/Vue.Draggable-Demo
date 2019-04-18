@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--网络请求框架-->
+<script src="https://cdn.bootcss.com/Sortable/1.8.4/Sortable.min.js"></script>
+<script src="https://cdn.bootcss.com/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+</head>
+<body>
+<div id="app">
+ <template>
+  <div>
+    <div>
+        <el-row :gutter="20">
+      <draggable :options="{animation:150}" :list="list" class="list-group">
+
+        <el-col :span="6" v-for="(element, index) in list">
+        <div class="list-group-item" >
+          <div >
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>{{index}}</span>
+                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+              </div>
+              <draggable :options="{animation:150}" :list="list[index]"  group="people" @end="end" @start="end">
+              <div v-for="(ee, i) in list[index]" class="text item">{{ee.name }}</div>
+              </draggable>
+            </el-card>
+          </div>
+        </div>
+        </el-col>
+
+      </draggable>
+       </el-row>
+    </div>
+  </div>
+</template>
+</div>
+
+<script>
+Vue.component('draggable',vuedraggable)
+var t =new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!',
+	oladindex:[],
+     list: [
+	 [
+        { name: '0A', id: 0 },
+        { name: '0B', id: 1 },
+        { name: '0C', id: 1 },
+        { name: '0D', id: 2 }
+      ],
+	    [
+       { name: '1A', id: 0 },
+        { name: '1B', id: 1 },
+        { name: '1C', id: 1 },
+        { name: '1D', id: 2 }
+      ],
+	    [
+        { name: '2A', id: 0 },
+        { name: '2B', id: 1 },
+        { name: '2C', id: 1 },
+        { name: '2D', id: 2 }
+      ],
+	    [
+        { name: '3A', id: 0 },
+        { name: '3B', id: 1 },
+        { name: '3C', id: 1 },
+        { name: '3D', id: 2 }
+      ]
+	  ]
+  },
+  mounted:function(){
+   
+  },
+  methods:{
+	end:function(data,c)
+	{
+	console.log(data)
+	console.log(c)
+	}
+  
+
+  }
+})
+</script>
+</body>
+</html>
